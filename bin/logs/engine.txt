@@ -1,0 +1,143 @@
+{"level":"info","ts":1657933864.0486639,"caller":"engine/main.go:20","msg":"Hello from zap logger"}
+{"level":"info","ts":1657933996.1039565,"caller":"engine/main.go:20","msg":"Engine started"}
+{"level":"info","ts":1657934604.2504883,"caller":"app/app.go:10","msg":"App started"}
+{"level":"info","ts":1657935185.9152322,"caller":"internal/app.go:10","msg":"App started"}
+{"level":"info","ts":1657936830.4626577,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657936830.97059,"caller":"internal/app.go:19","msg":"Tick %%v0"}
+{"level":"info","ts":1657936831.4757698,"caller":"internal/app.go:19","msg":"Tick %%v1"}
+{"level":"info","ts":1657936831.9675794,"caller":"internal/app.go:19","msg":"Tick %%v2"}
+{"level":"info","ts":1657936832.4735763,"caller":"internal/app.go:19","msg":"Tick %%v3"}
+{"level":"info","ts":1657936832.962765,"caller":"internal/app.go:19","msg":"Tick %%v4"}
+{"level":"info","ts":1657936833.4668667,"caller":"internal/app.go:19","msg":"Tick %%v5"}
+{"level":"info","ts":1657936833.9747698,"caller":"internal/app.go:19","msg":"Tick %%v6"}
+{"level":"info","ts":1657936834.4756072,"caller":"internal/app.go:19","msg":"Tick %%v7"}
+{"level":"info","ts":1657936834.9776056,"caller":"internal/app.go:19","msg":"Tick %%v8"}
+{"level":"info","ts":1657936835.4666076,"caller":"internal/app.go:19","msg":"Tick %%v9"}
+{"level":"info","ts":1657936835.9719746,"caller":"internal/app.go:19","msg":"Tick %%v10"}
+{"level":"info","ts":1657936854.4599826,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657936854.9655838,"caller":"internal/app.go:19","msg":"Tick0"}
+{"level":"info","ts":1657936855.471768,"caller":"internal/app.go:19","msg":"Tick1"}
+{"level":"info","ts":1657936855.9706326,"caller":"internal/app.go:19","msg":"Tick2"}
+{"level":"info","ts":1657936856.4695745,"caller":"internal/app.go:19","msg":"Tick3"}
+{"level":"info","ts":1657936856.9717638,"caller":"internal/app.go:19","msg":"Tick4"}
+{"level":"info","ts":1657936857.4635766,"caller":"internal/app.go:19","msg":"Tick5"}
+{"level":"info","ts":1657936857.963659,"caller":"internal/app.go:19","msg":"Tick6"}
+{"level":"info","ts":1657936858.4677637,"caller":"internal/app.go:19","msg":"Tick7"}
+{"level":"info","ts":1657936858.9718246,"caller":"internal/app.go:19","msg":"Tick8"}
+{"level":"info","ts":1657936859.4635801,"caller":"internal/app.go:19","msg":"Tick9"}
+{"level":"info","ts":1657936859.9696064,"caller":"internal/app.go:19","msg":"Tick10"}
+{"level":"info","ts":1657936908.0579307,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657936908.5625708,"caller":"internal/app.go:19","msg":"Tick0"}
+{"level":"info","ts":1657936909.0665762,"caller":"internal/app.go:19","msg":"Tick1"}
+{"level":"info","ts":1657936909.5725794,"caller":"internal/app.go:19","msg":"Tick2"}
+{"level":"info","ts":1657936910.0675786,"caller":"internal/app.go:19","msg":"Tick3"}
+{"level":"info","ts":1657936910.5585773,"caller":"internal/app.go:19","msg":"Tick4"}
+{"level":"info","ts":1657936911.0655646,"caller":"internal/app.go:19","msg":"Tick5"}
+{"level":"info","ts":1657936911.5736108,"caller":"internal/app.go:19","msg":"Tick6"}
+{"level":"info","ts":1657936912.0665767,"caller":"internal/app.go:19","msg":"Tick7"}
+{"level":"info","ts":1657936912.5585628,"caller":"internal/app.go:19","msg":"Tick8"}
+{"level":"info","ts":1657936913.0656068,"caller":"internal/app.go:19","msg":"Tick9"}
+{"level":"info","ts":1657936913.5727887,"caller":"internal/app.go:19","msg":"Tick10"}
+{"level":"info","ts":1657936928.0211802,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657936928.5246356,"caller":"internal/app.go:19","msg":"Tick0"}
+{"level":"info","ts":1657936929.0236156,"caller":"internal/app.go:19","msg":"Tick1"}
+{"level":"info","ts":1657936929.5267496,"caller":"internal/app.go:19","msg":"Tick2"}
+{"level":"info","ts":1657936930.033607,"caller":"internal/app.go:19","msg":"Tick3"}
+{"level":"info","ts":1657936930.5249183,"caller":"internal/app.go:19","msg":"Tick4"}
+{"level":"info","ts":1657936931.0295753,"caller":"internal/app.go:19","msg":"Tick5"}
+{"level":"info","ts":1657936931.530768,"caller":"internal/app.go:19","msg":"Tick6"}
+{"level":"info","ts":1657936932.0325701,"caller":"internal/app.go:19","msg":"Tick7"}
+{"level":"info","ts":1657936932.5256586,"caller":"internal/app.go:19","msg":"Tick8"}
+{"level":"info","ts":1657936933.0306957,"caller":"internal/app.go:19","msg":"Tick9"}
+{"level":"info","ts":1657936933.5347486,"caller":"internal/app.go:19","msg":"Tick10"}
+{"level":"info","ts":1657937013.7766793,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657937014.2855935,"caller":"internal/app.go:19","msg":"Tick0"}
+{"level":"info","ts":1657937014.7905765,"caller":"internal/app.go:19","msg":"Tick1"}
+{"level":"info","ts":1657937015.2836077,"caller":"internal/app.go:19","msg":"Tick2"}
+{"level":"info","ts":1657937015.7906098,"caller":"internal/app.go:19","msg":"Tick3"}
+{"level":"info","ts":1657937015.7906098,"caller":"aero/main.go:40","msg":"App stopped"}
+{"level":"info","ts":1657937186.8052633,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657937187.3175936,"caller":"internal/app.go:19","msg":"Tick{tick 11 0  <nil>}"}
+{"level":"info","ts":1657937187.8075767,"caller":"internal/app.go:19","msg":"Tick{tick 11 1  <nil>}"}
+{"level":"info","ts":1657937188.3175778,"caller":"internal/app.go:19","msg":"Tick{tick 11 2  <nil>}"}
+{"level":"info","ts":1657937188.8075757,"caller":"internal/app.go:19","msg":"Tick{tick 11 3  <nil>}"}
+{"level":"info","ts":1657937188.8075757,"caller":"aero/main.go:40","msg":"App stopped"}
+{"level":"info","ts":1657937258.112892,"caller":"internal/app.go:16","msg":"App started"}
+{"level":"info","ts":1657937258.62159,"caller":"internal/app.go:20","msg":"Tick{tick 15 0 0 <nil>}"}
+{"level":"info","ts":1657937259.1135838,"caller":"internal/app.go:20","msg":"Tick{tick 15 0 1 <nil>}"}
+{"level":"info","ts":1657937259.6195788,"caller":"internal/app.go:20","msg":"Tick{tick 15 0 2 <nil>}"}
+{"level":"info","ts":1657937260.1145709,"caller":"internal/app.go:20","msg":"Tick{tick 15 0 3 <nil>}"}
+{"level":"info","ts":1657937260.1145709,"caller":"aero/main.go:40","msg":"App stopped"}
+{"level":"info","ts":1657937314.718132,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657937315.2235758,"caller":"internal/app.go:19","msg":"Tick0"}
+{"level":"info","ts":1657937315.730768,"caller":"internal/app.go:19","msg":"Tick1"}
+{"level":"info","ts":1657937316.2327406,"caller":"internal/app.go:19","msg":"Tick2"}
+{"level":"info","ts":1657937316.7235768,"caller":"internal/app.go:19","msg":"Tick3"}
+{"level":"info","ts":1657937316.7235768,"caller":"aero/main.go:40","msg":"App stopped"}
+{"level":"info","ts":1657937474.0959826,"caller":"internal/app.go:16","msg":"App started"}
+{"level":"info","ts":1657937474.6037824,"caller":"internal/app.go:20","msg":"tick 0"}
+{"level":"info","ts":1657937475.11077,"caller":"internal/app.go:20","msg":"tick 1"}
+{"level":"info","ts":1657937475.6097615,"caller":"internal/app.go:20","msg":"tick 2"}
+{"level":"info","ts":1657937476.110843,"caller":"internal/app.go:20","msg":"tick 3"}
+{"level":"error","ts":1657937476.110843,"caller":"aero/main.go:31","msg":"stopped","stacktrace":"main.main\n\tC:/Users/fishy/go/src/github.com/fishykins/aero/cmd/aero/main.go:31\nruntime.main\n\tC:/Program Files/Go/src/runtime/proc.go:250"}
+{"level":"info","ts":1657937476.111385,"caller":"aero/main.go:40","msg":"App stopped"}
+{"level":"info","ts":1657937739.0805898,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657937739.5825794,"caller":"internal/app.go:19","msg":"tick 0"}
+{"level":"info","ts":1657937740.091766,"caller":"internal/app.go:19","msg":"tick 1"}
+{"level":"info","ts":1657937740.5847728,"caller":"internal/app.go:19","msg":"tick 2"}
+{"level":"info","ts":1657937741.0827394,"caller":"internal/app.go:19","msg":"tick 3"}
+{"level":"info","ts":1657937741.5885794,"caller":"internal/app.go:19","msg":"tick 4"}
+{"level":"info","ts":1657937742.0956676,"caller":"internal/app.go:19","msg":"tick 5"}
+{"level":"info","ts":1657937742.594585,"caller":"internal/app.go:19","msg":"tick 6"}
+{"level":"info","ts":1657937743.0826094,"caller":"internal/app.go:19","msg":"tick 7"}
+{"level":"info","ts":1657937743.5916126,"caller":"internal/app.go:19","msg":"tick 8"}
+{"level":"info","ts":1657937744.0817704,"caller":"internal/app.go:19","msg":"tick 9"}
+{"level":"info","ts":1657937744.5867393,"caller":"internal/app.go:19","msg":"tick 10"}
+{"level":"info","ts":1657937745.08657,"caller":"internal/app.go:19","msg":"tick 11"}
+{"level":"info","ts":1657937745.5899436,"caller":"internal/app.go:19","msg":"tick 12"}
+{"level":"info","ts":1657937746.0927458,"caller":"internal/app.go:19","msg":"tick 13"}
+{"level":"info","ts":1657937746.5808833,"caller":"internal/app.go:19","msg":"tick 14"}
+{"level":"info","ts":1657937747.083085,"caller":"internal/app.go:19","msg":"tick 15"}
+{"level":"info","ts":1657937747.5877633,"caller":"internal/app.go:19","msg":"tick 16"}
+{"level":"info","ts":1657937748.0957687,"caller":"internal/app.go:19","msg":"tick 17"}
+{"level":"info","ts":1657937748.585608,"caller":"internal/app.go:19","msg":"tick 18"}
+{"level":"info","ts":1657937749.0918038,"caller":"internal/app.go:19","msg":"tick 19"}
+{"level":"info","ts":1657937749.5817754,"caller":"internal/app.go:19","msg":"tick 20"}
+{"level":"info","ts":1657937750.0897787,"caller":"internal/app.go:19","msg":"tick 21"}
+{"level":"info","ts":1657937750.5957932,"caller":"internal/app.go:19","msg":"tick 22"}
+{"level":"info","ts":1657937751.083883,"caller":"internal/app.go:19","msg":"tick 23"}
+{"level":"info","ts":1657937751.5905066,"caller":"internal/app.go:19","msg":"tick 24"}
+{"level":"info","ts":1657937752.0826108,"caller":"internal/app.go:19","msg":"tick 25"}
+{"level":"info","ts":1657938376.219895,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657938481.9911778,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657938497.8892088,"caller":"internal/app.go:23","msg":"App stopped"}
+{"level":"info","ts":1657938545.4121094,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657938545.9226232,"caller":"internal/app.go:19","msg":"Tick0"}
+{"level":"info","ts":1657938546.4145706,"caller":"internal/app.go:19","msg":"Tick1"}
+{"level":"info","ts":1657938546.9225707,"caller":"internal/app.go:19","msg":"Tick2"}
+{"level":"info","ts":1657938547.4127746,"caller":"internal/app.go:19","msg":"Tick3"}
+{"level":"info","ts":1657938547.920771,"caller":"internal/app.go:19","msg":"Tick4"}
+{"level":"info","ts":1657938548.4241955,"caller":"internal/app.go:19","msg":"Tick5"}
+{"level":"info","ts":1657938548.9265697,"caller":"internal/app.go:19","msg":"Tick6"}
+{"level":"info","ts":1657938549.4195778,"caller":"internal/app.go:19","msg":"Tick7"}
+{"level":"info","ts":1657938549.9277754,"caller":"internal/app.go:19","msg":"Tick8"}
+{"level":"info","ts":1657938550.4155612,"caller":"internal/app.go:19","msg":"Tick9"}
+{"level":"info","ts":1657938550.914581,"caller":"internal/app.go:19","msg":"Tick10"}
+{"level":"info","ts":1657938551.0769103,"caller":"internal/app.go:24","msg":"App stopped"}
+{"level":"info","ts":1657938676.452432,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657938692.8735332,"caller":"internal/app.go:24","msg":"App stopped"}
+{"level":"info","ts":1657938732.0708828,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657938734.3061123,"caller":"aero/main.go:36","msg":"asfghf\r\n"}
+{"level":"info","ts":1657938742.3889627,"caller":"internal/app.go:24","msg":"App stopped"}
+{"level":"info","ts":1657938826.875387,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657938830.037146,"caller":"internal/app.go:28","msg":"hello\r\n"}
+{"level":"info","ts":1657938851.5198293,"caller":"internal/app.go:24","msg":"App stopped"}
+{"level":"info","ts":1657938854.7658584,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657938857.4341881,"caller":"internal/app.go:28","msg":"hello\r"}
+{"level":"info","ts":1657938888.5147083,"caller":"internal/app.go:24","msg":"App stopped"}
+{"level":"info","ts":1657938890.0403109,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1657938891.3758867,"caller":"internal/app.go:28","msg":"goon"}
+{"level":"info","ts":1657938893.4134445,"caller":"internal/app.go:24","msg":"App stopped"}
+{"level":"info","ts":1658191859.847248,"caller":"internal/app.go:15","msg":"App started"}
+{"level":"info","ts":1658191870.384432,"caller":"internal/app.go:31","msg":"goon"}
+{"level":"info","ts":1658191884.9599407,"caller":"internal/app.go:27","msg":"App stopped"}
