@@ -1,14 +1,25 @@
 package ecs
 
+import "reflect"
+
+// World is the main object of the ECS system. It contains all the entities and components,
+// and should be used to instantiate new ones.
 type World struct {
 	Entities   []Entity
-	Components map[*Component]map[int]Component
+	Components map[reflect.Type]map[int]Component
 	nextId     int
 }
 
+type Entity struct {
+	uuid int
+}
+
+type Component interface{}
+
 func NewWorld() World {
 	var world World = World{
-		Components: make(map[*Component]map[int]Component),
+		Entities:   make([]Entity, 0),
+		Components: make(map[reflect.Type]map[int]Component),
 		nextId:     0,
 	}
 	return world
@@ -27,44 +38,26 @@ func (w *World) GetEntity(uuid int) Entity {
 }
 
 func (w *World) AddComponent(entity Entity, component Component) {
-	if _, ok := w.Components[&component]; !ok {
-		w.Components[&component] = make(map[int]Component)
+	var compType = reflect.TypeOf(component)
+
+	if _, ok := w.Components[compType]; !ok {
+		w.Components[compType] = make(map[int]Component)
 	}
-	w.Components[&component][entity.UUID()] = component
+	w.Components[compType][entity.UUID()] = component
 }
 
 func (w *World) GetComponent(entity Entity, component *Component) (Component, bool) {
-	if _, ok := w.Components[component]; !ok {
+	var compType = reflect.TypeOf(component)
+	if _, ok := w.Components[compType]; !ok {
 		return nil, false
 	}
 
-	if _, ok := w.Components[component][entity.UUID()]; !ok {
+	if _, ok := w.Components[compType][entity.UUID()]; !ok {
 		return nil, false
 	}
-	return w.Components[component][entity.UUID()], true
+	return w.Components[compType][entity.UUID()], true
 }
 
-func (w *World) FilterEntities(with []*Component) []Entity {
-	var entities []Entity = make([]Entity, 0)
-	var scores map[*Entity]int = make(map[*Entity]int)
-	var requiredScore int = len(with)
-
-	for _, Component := range with {
-		if _, ok := w.Components[Component]; !ok {
-			return nil
-		}
-		for uuid, _ := range w.Components[Component] {
-			var entity = w.GetEntity(uuid)
-
-			if _, ok := scores[&entity]; !ok {
-				scores[&entity] = 0
-			}
-			scores[&entity] += 1
-			if scores[&entity] == requiredScore {
-				entities = append(entities, entity)
-			}
-		}
-
-	}
-	return entities
+func (e *Entity) UUID() int {
+	return e.uuid
 }

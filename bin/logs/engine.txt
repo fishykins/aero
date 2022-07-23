@@ -141,3 +141,50 @@
 {"level":"info","ts":1658191859.847248,"caller":"internal/app.go:15","msg":"App started"}
 {"level":"info","ts":1658191870.384432,"caller":"internal/app.go:31","msg":"goon"}
 {"level":"info","ts":1658191884.9599407,"caller":"internal/app.go:27","msg":"App stopped"}
+{"level":"info","ts":1658276363.4512267,"caller":"internal/app.go:21","msg":"App started"}
+{"level":"info","ts":1658276372.370286,"caller":"internal/app.go:37","msg":"goon"}
+{"level":"info","ts":1658276373.892085,"caller":"internal/app.go:33","msg":"App stopped"}
+{"level":"info","ts":1658278882.6987956,"caller":"ecs/app.go:82","msg":""}
+{"level":"info","ts":1658278882.6995203,"caller":"ecs/app.go:78","msg":"App stopped"}
+{"level":"info","ts":1658279046.6539645,"caller":"ecs/app.go:83","msg":""}
+{"level":"info","ts":1658279046.6547043,"caller":"ecs/app.go:79","msg":"App stopped"}
+{"level":"info","ts":1658279091.608321,"caller":"ecs/app.go:83","msg":""}
+{"level":"info","ts":1658279091.6095493,"caller":"ecs/app.go:79","msg":"App stopped"}
+{"level":"info","ts":1658279158.5242937,"caller":"ecs/app.go:49","msg":"\nParameter IN: 0\nKind: string\nComponent: true\n-----------"}
+{"level":"info","ts":1658279158.5248032,"caller":"ecs/app.go:49","msg":"\nParameter IN: 1\nKind: int\nComponent: true\n-----------"}
+{"level":"info","ts":1658279164.143854,"caller":"ecs/app.go:83","msg":""}
+{"level":"info","ts":1658279164.143854,"caller":"ecs/app.go:79","msg":"App stopped"}
+{"level":"info","ts":1658279684.722531,"caller":"ecs/app.go:48","msg":"System:%!(EXTRA string=test, string=, input:, int=0, string=, kind:, reflect.Kind=struct)"}
+{"level":"info","ts":1658279688.64317,"caller":"ecs/app.go:82","msg":""}
+{"level":"info","ts":1658279688.6439862,"caller":"ecs/app.go:78","msg":"App stopped"}
+{"level":"info","ts":1658279782.5087562,"caller":"ecs/app.go:47","msg":"System:%!(EXTRA string=test, string=, input:, int=0, string=, kind:, reflect.Kind=struct)"}
+{"level":"info","ts":1658279783.8493025,"caller":"ecs/app.go:81","msg":""}
+{"level":"info","ts":1658279783.850978,"caller":"ecs/app.go:77","msg":"App stopped"}
+{"level":"info","ts":1658279820.0181084,"caller":"ecs/app.go:47","msg":"System:test, input:0, kind:struct"}
+{"level":"info","ts":1658279823.8869324,"caller":"ecs/app.go:81","msg":""}
+{"level":"info","ts":1658279823.88778,"caller":"ecs/app.go:77","msg":"App stopped"}
+{"level":"info","ts":1658281160.2408838,"caller":"ecs/app.go:47","msg":"System:test, input:0, asignable:true"}
+{"level":"info","ts":1658281160.2408838,"caller":"ecs/app.go:47","msg":"System:test, input:1, asignable:true"}
+{"level":"info","ts":1658281160.2413926,"caller":"ecs/app.go:47","msg":"System:test, input:2, asignable:true"}
+{"level":"info","ts":1658281167.2416327,"caller":"ecs/app.go:81","msg":""}
+{"level":"info","ts":1658281167.2422476,"caller":"ecs/app.go:77","msg":"App stopped"}
+{"level":"info","ts":1658281423.3609755,"caller":"ecs/app.go:47","msg":"System:test, input:0, asignable:true"}
+{"level":"info","ts":1658281504.7785072,"caller":"ecs/app.go:47","msg":"System:test, input:0, asignable:true"}
+{"level":"info","ts":1658281504.7790198,"caller":"ecs/app.go:47","msg":"System:test, input:1, asignable:true"}
+{"level":"info","ts":1658281504.7790198,"caller":"ecs/app.go:47","msg":"System:test, input:2, asignable:true"}
+{"level":"info","ts":1658281504.7790198,"caller":"ecs/app.go:47","msg":"System:test2, input:0, asignable:true"}
+{"level":"info","ts":1658281504.7795303,"caller":"ecs/app.go:47","msg":"System:test2, input:1, asignable:true"}
+{"level":"info","ts":1658281508.1239552,"caller":"ecs/app.go:83","msg":""}
+{"level":"info","ts":1658281508.1242409,"caller":"ecs/app.go:79","msg":"App stopped"}
+{"level":"info","ts":1658281806.9974039,"caller":"ecs/app.go:57","msg":"Systemtestadded"}
+{"level":"info","ts":1658281806.9979162,"caller":"ecs/app.go:57","msg":"Systemtest2added"}
+{"level":"info","ts":1658281812.0609162,"caller":"ecs/app.go:89","msg":""}
+{"level":"info","ts":1658281812.0619168,"caller":"ecs/app.go:85","msg":"App stopped"}
+{"level":"info","ts":1658282315.8382773,"caller":"ecs/app.go:58","msg":"Systemtestadded"}
+{"level":"info","ts":1658282315.8387897,"caller":"ecs/app.go:58","msg":"Systemtest2added"}
+{"level":"info","ts":1658282320.8666158,"caller":"ecs/app.go:90","msg":""}
+{"level":"info","ts":1658282320.867156,"caller":"ecs/app.go:86","msg":"App stopped"}
+{"level":"info","ts":1658282346.8235013,"caller":"ecs/app.go:58","msg":"System 'test' added"}
+{"level":"info","ts":1658282346.8240166,"caller":"ecs/app.go:58","msg":"System 'test2' added"}
+{"level":"info","ts":1658282347.4367564,"caller":"ecs/app.go:90","msg":""}
+{"level":"info","ts":1658282347.4370103,"caller":"ecs/app.go:86","msg":"App stopped"}

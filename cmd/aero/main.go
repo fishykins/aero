@@ -9,9 +9,20 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fishykins/aero/internal"
+	"github.com/fishykins/aero/pkg/ecs"
 	"go.uber.org/zap"
 )
+
+type name struct {
+	value string
+}
+
+type age struct {
+	value int
+}
+
+func testSystem1(entities []ecs.Entity, ages []age, names []name) {}
+func testSystem2(ages []age)                                      {}
 
 func main() {
 	cfg := zap.NewProductionConfig()
@@ -26,10 +37,7 @@ func main() {
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, os.Interrupt, syscall.SIGTERM)
 
-	app := internal.App{
-		Logger: sugar,
-	}
-	app.Init()
+	app := ecs.NewAppBuilder().WithLogger(sugar).WithSystem("test", testSystem1).WithSystem("test2", testSystem2).Build()
 
 	reader := bufio.NewReader(os.Stdin)
 	go func() {
