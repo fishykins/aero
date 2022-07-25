@@ -1,4 +1,4 @@
-package ecs
+package ecs2
 
 // These are core types used by the ecs package.
 type ECS struct {
@@ -10,7 +10,7 @@ type World struct {
 	// The list of entities in the world.
 	Entities []Entity
 	// The list of systems in the world.
-	Systems []SystemPair
+	Systems map[string]SystemData
 	// The list of components in the world.
 	Components map[string]map[Entity]Component
 }
@@ -25,9 +25,12 @@ type Component interface {
 
 type System func(w *World, q ...QueryResult)
 
-type SystemPair struct {
+type SystemData struct {
 	queries []Query
 	system  System
+	name    string
+	after   []string
+	before  []string
 }
 
 type Query struct {
@@ -45,6 +48,8 @@ type QueryResult struct {
 
 // Less important helper structs used internally by the ecs package.
 type systemExecutable struct {
-	system  func(w *World, q ...QueryResult)
-	queries []QueryResult
+	system   func(w *World, q ...QueryResult)
+	queries  []QueryResult
+	triggers []string
+	delayed  bool
 }

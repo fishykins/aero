@@ -1,4 +1,4 @@
-package ecs
+package ecs2
 
 import "testing"
 

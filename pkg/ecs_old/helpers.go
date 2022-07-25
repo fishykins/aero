@@ -1,17 +1,23 @@
-package ecs
+package ecs2
 
-import "log"
+import (
+	"reflect"
+	"runtime"
+	"strings"
+)
 
 func NewQuery(with []string, without []string) Query {
 	compiledWith := make([]QueryComponent, len(with))
 	for i, component := range with {
 		compiledWith[i] = QueryComponent{Type: component}
 	}
-	ret := Query{
+	return Query{
 		With:    compiledWith,
 		Without: without,
 	}
+}
 
-	log.Println("NewQuery:", ret)
-	return ret
+func GetFunctionName(i interface{}) string {
+	fullStr := runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
+	return fullStr[strings.LastIndex(fullStr, ".")+1:]
 }
