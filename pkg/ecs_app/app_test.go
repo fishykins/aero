@@ -15,7 +15,7 @@ func (a *age) Type() string {
 	return "age"
 }
 
-func ageSystem(m *core.Manager, queries ...core.QueryResult) {
+func ageSystem(m *core.WorldManager, queries ...core.QueryResult) {
 	ageQuery := queries[0]
 	for _, components := range ageQuery.Result {
 		age := components[0].(*age)
@@ -23,7 +23,7 @@ func ageSystem(m *core.Manager, queries ...core.QueryResult) {
 	}
 }
 
-func printAgeSystem(m *core.Manager, queries ...core.QueryResult) {
+func printAgeSystem(m *core.WorldManager, queries ...core.QueryResult) {
 	ageQuery := queries[0]
 	for _, components := range ageQuery.Result {
 		age := components[0].(*age)
@@ -36,7 +36,5 @@ func TestApp(t *testing.T) {
 	app.AddEntity("Fishy").With(&age{Age: 29})
 	app.AddSystem(ageSystem, core.NewQuery("age"))
 	app.AddSystem(printAgeSystem, core.NewQuery("age")).After("ageSystem")
-	for i := 0; i < 4; i++ {
-		app.Update()
-	}
+	app.Run()
 }

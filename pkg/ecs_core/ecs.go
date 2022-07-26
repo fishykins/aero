@@ -8,7 +8,7 @@ type Component interface {
 	Type() string
 }
 
-type System func(*Manager, ...QueryResult)
+type System func(*WorldManager, ...QueryResult)
 
 type Query struct {
 	Components []string

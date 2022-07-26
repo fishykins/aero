@@ -7,32 +7,52 @@ import (
 	"github.com/fishykins/aero/pkg/slotmap"
 )
 
+// a World contains all the data corresponding to the ECS system.
 type World struct {
 	Entities   slotmap.SlotMap[string]
 	Queries    map[uint32]core.Query
 	Components map[string]map[core.Entity]core.Component
+	Resources  map[string]core.Component
 	Systems    map[string]SystemData
 }
+
+var defaultWorld *World
 
 func NewWorld() *World {
 	return &World{
 		Entities:   slotmap.New[string]("entity"),
 		Queries:    make(map[uint32]core.Query),
 		Components: make(map[string]map[core.Entity]core.Component),
+		Resources:  make(map[string]core.Component),
 		Systems:    make(map[string]SystemData),
 	}
 }
 
+func DefaultWorld() *World {
+	if defaultWorld == nil {
+		defaultWorld = NewWorld()
+	}
+	return defaultWorld
+}
+
+func (w *World) SetDefault() {
+	defaultWorld = w
+}
+
 // Looks over the world manager and instantiates any pending entities/systems.
 // This should be called once per frame, and probably at the end of the main loop.
-func (w *World) Manage(manager *core.Manager) {
+// We can also push/pull resource data from the world manager.
+func (w *World) Manage(manager *core.WorldManager) {
 	w.manageEntities(manager)
+	w.manageComponents(manager)
 	w.manageSystems(manager)
 	manager.PendingEntities = nil
 	manager.PendingSystems = nil
+	manager.PendingComponents = nil
+	w.Resources = manager.Resources()
 }
 
-func (w *World) manageEntities(manager *core.Manager) {
+func (w *World) manageEntities(manager *core.WorldManager) {
 	for _, eb := range manager.PendingEntities {
 		id, components := eb.Build()
 		entity := core.Entity(w.Entities.Add(id))
@@ -46,7 +66,18 @@ func (w *World) manageEntities(manager *core.Manager) {
 	}
 }
 
-func (w *World) manageSystems(manager *core.Manager) {
+func (w *World) manageComponents(manager *core.WorldManager) {
+	for _, componentType := range manager.PendingComponents {
+		for entity, component := range componentType {
+			if _, ok := w.Components[component.Type()]; !ok {
+				w.Components[component.Type()] = make(map[core.Entity]core.Component)
+			}
+			w.Components[component.Type()][entity] = component
+		}
+	}
+}
+
+func (w *World) manageSystems(manager *core.WorldManager) {
 	runtimeUpdates := make(map[string][]string)
 	// Build all pending systems
 	for _, sb := range manager.PendingSystems {
@@ -124,7 +155,7 @@ func (w *World) buildQuery(id uint32, query core.Query, output chan<- core.Query
 	}
 }
 
-func (w *World) RunSystem(id string, response chan<- string, manager *core.Manager, queries ...core.QueryResult) {
+func (w *World) RunSystem(id string, response chan<- string, manager *core.WorldManager, queries ...core.QueryResult) {
 	if _, ok := w.Systems[id]; !ok {
 		log.Fatal("System not found: ", id)
 		return
@@ -132,7 +163,6 @@ func (w *World) RunSystem(id string, response chan<- string, manager *core.Manag
 	system := w.Systems[id]
 
 	// Run the system.
-	log.Printf("Running system: %s\n", id)
 	system.System(manager, queries...)
 	response <- id
 }

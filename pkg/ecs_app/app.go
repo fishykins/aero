@@ -1,21 +1,28 @@
 package ecs
 
 import (
-	"log"
+	"os"
+	"os/signal"
+	"time"
 
 	inecs "github.com/fishykins/aero/internal/inecs"
 	core "github.com/fishykins/aero/pkg/ecs_core"
+	log "github.com/fishykins/aero/pkg/logging"
 )
 
+var Log log.Logger
+
 type App struct {
-	world   *inecs.World
-	manager *core.Manager
+	// World stores critial ECS data. It should never be exposed to the end-user!
+	world *inecs.World
+	// The world manager is an endpoint for the user, and can be used to add/remove data from the world in a controlled manner.
+	manager *core.WorldManager
 }
 
 func New() *App {
 	return &App{
 		world:   inecs.NewWorld(),
-		manager: core.NewManager(),
+		manager: core.NewWorldManager(),
 	}
 }
 
@@ -23,16 +30,59 @@ func (a *App) AddEntity(args ...string) *core.EntityBuilder {
 	return a.manager.AddEntity(args...)
 }
 
+func (a *App) AddComponent(entity *core.Entity, component core.Component) {
+	a.manager.AddComponent(entity, component)
+}
+
 func (a *App) AddSystem(system core.System, args ...core.Query) *core.SystemBuilder {
 	return a.manager.AddSystem(system, args...)
 }
 
+func (a *App) AddResource(resource core.Component) {
+	a.manager.AddResource(resource.Type(), resource)
+}
+
 func (a *App) Run() {
-	// TODO
+	var ticker *time.Ticker
+
+	if fps, err := a.manager.GetResource("UpdateFrequency"); err != nil {
+		ticker = time.NewTicker(time.Second)
+	} else {
+		ticker = time.NewTicker(fps.(core.UpdateFrequency).FPS())
+	}
+
+	exit := make(chan bool)
+	c := make(chan os.Signal)
+	log.Info("Starting ECS App")
+
+	// Catch Ctrl-C command
+	signal.Notify(c, os.Interrupt)
+	go func() {
+		for range c {
+			exit <- true
+			return
+		}
+	}()
+
+	// Run the main loop
+	go func() {
+		for {
+			select {
+			case <-ticker.C:
+				a.Update()
+			case <-exit:
+				ticker.Stop()
+				return
+			}
+		}
+	}()
+
+	// Wait for exit
+	<-exit
+	a.Shutdown()
 }
 
 func (a *App) Update() {
-	log.Println("====================== UPDATE ======================")
 	// Checks the manager for new entities, components and systems.
 	a.world.Manage(a.manager)
 
@@ -57,10 +107,8 @@ func (a *App) Update() {
 		select {
 		case query := <-queryChan:
 			queries[query.ID] = query
-			log.Println("Query finished:", query.ID)
 		case system := <-systemChan:
 			finishedSystems[system] = true
-			log.Println("System finished:", system)
 		}
 
 		// Check if any pending systems can start
@@ -94,4 +142,8 @@ func (a *App) Update() {
 			}
 		}
 	}
+}
+
+func (a *App) Shutdown() {
+	log.Warn("Shutting down ECS App")
 }
