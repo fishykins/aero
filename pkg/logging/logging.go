@@ -10,6 +10,10 @@ type Logger struct {
 
 var DefaultLogger *Logger = New()
 
+func Default() *Logger {
+	return DefaultLogger
+}
+
 func New() *Logger {
 	log := logrus.New()
 	log.Formatter = new(logrus.TextFormatter)
@@ -23,6 +27,10 @@ func New() *Logger {
 func (l *Logger) WithLevel(level logrus.Level) *Logger {
 	l.logger.SetLevel(level)
 	return l
+}
+
+func SetLevel(l uint32) {
+	DefaultLogger.WithLevel(logrus.Level(l))
 }
 
 // ============================================================================
@@ -44,11 +52,11 @@ func TraceWith(msg string, fields map[string]interface{}) {
 
 // ============================================================================
 // ============================================================================
-func (l *Logger) Info(msg string) {
-	l.logger.Infof(msg)
+func (l *Logger) Info(format string, args ...interface{}) {
+	l.logger.Infof(format, args...)
 }
-func Info(msg string) {
-	DefaultLogger.Info(msg)
+func Info(format string, args ...interface{}) {
+	DefaultLogger.Info(format, args...)
 }
 
 // ============================================================================

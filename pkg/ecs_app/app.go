@@ -23,7 +23,7 @@ func New() *App {
 	}
 }
 
-func (a *App) NewEntity() *ecs.EntityBuilder {
+func (a *App) AddEntity() *ecs.EntityBuilder {
 	return a.manager.NewEntity()
 }
 
@@ -106,6 +106,7 @@ func (a *App) Update() {
 		select {
 		case query := <-queryChan:
 			queries[query.ID] = query
+			log.TraceWith("Query: finished", map[string]interface{}{"id": query.ID})
 		case system := <-systemChan:
 			finishedSystems[system] = true
 		}

@@ -18,7 +18,9 @@ func NewWorldManager() *WorldManager {
 }
 
 func (wm *WorldManager) NewEntity() *EntityBuilder {
-	return NewEntityBuilder()
+	eb := NewEntityBuilder()
+	wm.pendingEntities = append(wm.pendingEntities, eb)
+	return eb
 }
 
 func (wm *WorldManager) AddComponent(entity Entity, component interface{}) *ComponentBuilder {

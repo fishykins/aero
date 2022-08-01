@@ -28,16 +28,7 @@ type System struct {
 
 type SystemFunc func(manager *WorldManager, queries ...QueryResult)
 
-type Query interface {
-	Tags() []string
-}
-
-type EntityRequest struct {
-}
-
-type ResourceRequest struct {
-}
-
+type Query []string
 type QueryResult struct {
 	ID     uint32
 	Result map[Entity][]interface{}

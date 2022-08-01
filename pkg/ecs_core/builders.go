@@ -53,8 +53,8 @@ func NewSystemBuilder(systemFunc SystemFunc) *SystemBuilder {
 	}
 }
 
-func (sb *SystemBuilder) WithQuery(query Query) *SystemBuilder {
-	sb.queries = append(sb.queries, query)
+func (sb *SystemBuilder) WithQuery(tags ...string) *SystemBuilder {
+	sb.queries = append(sb.queries, tags)
 	return sb
 }
 
@@ -81,7 +81,7 @@ func (sb *SystemBuilder) Before(before ...interface{}) *SystemBuilder {
 
 func (sb *SystemBuilder) getId() string {
 	if sb.id == nil {
-		GetTypeId(sb.systemFunc)
+		return GetTypeId(sb.systemFunc)
 	}
 	return *sb.id
 }
@@ -93,35 +93,5 @@ func NewWorld() *World {
 		Systems:    map[string]System{},
 		Queries:    map[uint32]Query{},
 		Resources:  map[string]interface{}{},
-	}
-}
-
-func (w *World) BuildQuery(id uint32, query Query, output chan<- QueryResult) {
-	// We are going to assume that all queries are valid at this stage of the process.
-	entities := make(map[Entity][]interface{})
-	initialComponentType := query.Tags()[0]
-	initialEntities := w.Components[initialComponentType]
-	// Go through the first component type and find all entities that have the required component.
-	// We will then go through the remaining component types and thin down this list to only include
-	// entities that have all the required components.
-	for entity, initialComponent := range initialEntities {
-		entities[Entity(entity)] = []interface{}{initialComponent}
-	}
-	// Now we have a list of entities that have the first component- look for each of these in the remaining components.
-	// If a component is not found, the entity is removed from the pool, thinning the list.
-	for _, componentType := range query.Tags()[1:] {
-		currentComponent := w.Components[componentType]
-		for entity := range entities {
-			if _, ok := currentComponent[entity]; !ok {
-				delete(entities, entity)
-			} else {
-				entities[entity] = append(entities[entity], currentComponent[entity])
-			}
-		}
-	}
-	// At this point, we should have a good list- wrap it up and send it to the output channel.
-	output <- QueryResult{
-		ID:     id,
-		Result: entities,
 	}
 }
