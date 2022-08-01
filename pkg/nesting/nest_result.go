@@ -10,17 +10,8 @@ type NestResult struct {
 }
 
 // Returns the index value of the result.
-func (n NestResult) Index() slotmap.SlotMapIndex {
+func (n NestResult) Unwrap() slotmap.SlotMapIndex {
 	return *n.result
-}
-
-// Returns the data structure at the given index, or returns an error if the index is invalid.
-func (n NestResult) Data() (*interface{}, error) {
-	return n.nest.Data(*n.result)
-}
-
-func (n NestResult) Name() (string, error) {
-	return n.nest.Name(*n.result)
 }
 
 // Returns the data structure at the given index, or returns an error if the index is invalid.
@@ -39,9 +30,9 @@ func (n NestResult) Adopt(child *slotmap.SlotMapIndex) error {
 }
 
 // Instantiates a new Owl and adds it to the nest as a child of the given parent.
-func (n NestResult) Birth(data interface{}, args ...string) NestResult {
-	child := n.nest.Add(data, args...)
-	n.nest.Adopt(*n.result, child.Index())
+func (n NestResult) Birth() NestResult {
+	child := n.nest.Add()
+	n.nest.Adopt(*n.result, child.Unwrap())
 	return child
 }
 

@@ -4,41 +4,25 @@ import (
 	"testing"
 )
 
-type animalSound struct {
-	string
-}
-
 func TestNest(t *testing.T) {
 	var nest = NewNest(8)
-	fishy := nest.Add(animalSound{"Quack"})
-	hillan := nest.Add(animalSound{"BUNNIESSS"}, "Hillan")
-
-	noise, err := fishy.Data()
-	if err != nil {
-		t.Error(err)
-	}
-	t.Log(*noise)
+	fishy := nest.Add()
+	hillan := nest.Add()
 
 	fishy.Remove()
 
-	_, err = nest.Data(fishy.Index())
-	if err == nil {
-		t.Error("Expected error")
-	}
+	frogbert := hillan.Birth().Unwrap()
 
-	frogbert := hillan.Birth(animalSound{"Ribbit"}, "Frogbert").Index()
-
-	var parent NestResult
-	parent, err = nest.GetParent(frogbert)
+	parent, err := nest.GetParent(frogbert)
 	if err != nil {
 		t.Error(err)
 	}
-	if parent.Index() != hillan.Index() {
+	if parent.Unwrap() != hillan.Unwrap() {
 		t.Error("Expected parent to be Hillan")
 	}
 
 	var majasSiblings []NestResult
-	majasSiblings, err = hillan.Birth(animalSound{"nus nus nus"}, "Maja").Siblings()
+	majasSiblings, err = hillan.Birth().Siblings()
 	if err != nil {
 		t.Error(err)
 	}
@@ -48,7 +32,7 @@ func TestNest(t *testing.T) {
 		}
 		t.Error("Expected Maja to only have one sibling, but she has", len(majasSiblings))
 	}
-	if majasSiblings[0].Index() != frogbert {
+	if majasSiblings[0].Unwrap() != frogbert {
 		t.Error("Expected Maja to be a sibling of Frogbert")
 	}
 }

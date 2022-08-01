@@ -1,14 +1,21 @@
-package ecscore
+package ecs
 
 import (
+	"hash/fnv"
 	"reflect"
 	"runtime"
 	"strings"
 )
 
-func GetFunctionName(i interface{}) string {
-	fullStr := runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
-	return fullStr[strings.LastIndex(fullStr, ".")+1:]
+func GetTypeId(i interface{}) string {
+	component, ok := i.(Labled)
+	if !ok {
+		// Just get the type name if it's not a component.
+		fullStr := runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
+		return fullStr[strings.LastIndex(fullStr, ".")+1:]
+	} else {
+		return component.Type()
+	}
 }
 
 func RemoveDuplicateStr(strSlice []string) []string {
@@ -23,8 +30,9 @@ func RemoveDuplicateStr(strSlice []string) []string {
 	return list
 }
 
-func NewQuery(tags ...string) Query {
-	return Query{
-		Components: tags,
-	}
+func HashTags(tags []string) uint32 {
+	h := fnv.New32a()
+	s := strings.Join(tags[:], ",")
+	h.Write([]byte(s))
+	return h.Sum32()
 }

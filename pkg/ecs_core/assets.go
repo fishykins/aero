@@ -1,6 +1,12 @@
-package ecscore
+package ecs
 
 import "time"
+
+type Name string
+
+func (n Name) Type() string {
+	return string(n)
+}
 
 type UpdateFrequency uint32
 

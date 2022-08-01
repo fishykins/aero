@@ -19,19 +19,10 @@ func NewNest(initialCapacity int) *Nest {
 }
 
 // Adds a new data structure to the nest, returning the index of the subsequent Owl.
-func (n *Nest) Add(data interface{}, args ...string) NestResult {
-	var name string
-	if len(args) == 0 {
-		name = "owl"
-	} else {
-		name = args[0]
-	}
-
+func (n *Nest) Add() NestResult {
 	var owl = Owl{
-		Name:     name,
 		Parent:   nil,
 		Children: make([]*slotmap.SlotMapIndex, 0),
-		Data:     data,
 	}
 
 	index := n.owls.Add(owl)
@@ -39,23 +30,6 @@ func (n *Nest) Add(data interface{}, args ...string) NestResult {
 		nest:   n,
 		result: &index,
 	}
-}
-
-// Gets the data structure at the given index, or returns an error if the index is invalid.
-func (n *Nest) Data(index slotmap.SlotMapIndex) (*interface{}, error) {
-	owl, err := n.owls.Get(index)
-	if err != nil {
-		return nil, err
-	}
-	return &owl.Data, nil
-}
-
-func (n *Nest) Name(index slotmap.SlotMapIndex) (string, error) {
-	owl, err := n.owls.Get(index)
-	if err != nil {
-		return "", err
-	}
-	return owl.Name, nil
 }
 
 // Removes the data structure at the given index, or returns an error if the index is invalid.
