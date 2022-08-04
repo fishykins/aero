@@ -104,6 +104,7 @@ func (m *WorldManager) updateEntities(w *World, c chan<- bool) {
 				w.Components[typeId] = make(map[Entity]interface{})
 			}
 			w.Components[typeId][entity] = component
+			log.InfoWith("component added", map[string]interface{}{"type": typeId, "data": component, "entity": entity})
 		}
 	}
 	m.pendingEntities = make([]*EntityBuilder, 0)

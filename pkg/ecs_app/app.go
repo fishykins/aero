@@ -106,7 +106,7 @@ func (a *App) Update() {
 		select {
 		case query := <-queryChan:
 			queries[query.ID] = query
-			log.TraceWith("Query: finished", map[string]interface{}{"id": query.ID})
+			log.TraceWith("Query: finished", map[string]interface{}{"id": query.ID, "result": query.Result})
 		case system := <-systemChan:
 			finishedSystems[system] = true
 		}

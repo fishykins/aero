@@ -15,6 +15,11 @@ func GetTypeId(i interface{}) string {
 			return i.(string)
 		}
 		// Just get the type name if it's not a component.
+		easy := reflect.TypeOf(i).Name()
+		if easy != "" {
+			return easy
+		}
+
 		fullStr := runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
 		return fullStr[strings.LastIndex(fullStr, ".")+1:]
 	} else {

@@ -5,7 +5,7 @@ import "time"
 type Name string
 
 func (n Name) Type() string {
-	return string(n)
+	return "Name"
 }
 
 type UpdateFrequency uint32
