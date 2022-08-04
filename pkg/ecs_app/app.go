@@ -45,7 +45,7 @@ func (a *App) Run() {
 	if fps, err := a.world.GetResource("UpdateFrequency"); err != nil {
 		ticker = time.NewTicker(time.Second)
 	} else {
-		ticker = time.NewTicker(fps.(ecs.UpdateFrequency).FPS())
+		ticker = time.NewTicker(fps.(*ecs.UpdateFrequency).FPS())
 	}
 
 	exit := make(chan bool)
@@ -131,13 +131,22 @@ func (a *App) Update() {
 						}
 					}
 					if systemScore == len(requiredSystems) {
+						// The system is ready to run- grab resources and lets go!
+						resources := make(ecs.RMap)
+						for _, resourceId := range system.GetResources() {
+							r, err := a.world.GetResource(resourceId)
+							if err != nil {
+								log.ErrorWith("Failed to get resource", map[string]interface{}{"id": resourceId})
+							}
+							resources[resourceId] = r
+						}
 						// Run the system!
 						pendingSystems[s] = false
 						systemQueries := make([]ecs.QueryResult, 0)
 						for _, query := range requiredQueries {
 							systemQueries = append(systemQueries, queries[query])
 						}
-						go a.world.RunSystem(s, systemChan, a.manager, systemQueries...)
+						go a.world.RunSystem(s, systemChan, a.manager, resources, systemQueries...)
 					}
 				}
 			}

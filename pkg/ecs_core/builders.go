@@ -41,6 +41,7 @@ type SystemBuilder struct {
 	id         *string
 	systemFunc SystemFunc
 	queries    []Query
+	resources  []string
 	runAfter   []string
 	rubBefore  []string
 }
@@ -50,11 +51,19 @@ func NewSystemBuilder(systemFunc SystemFunc) *SystemBuilder {
 		id:         nil,
 		systemFunc: systemFunc,
 		queries:    []Query{},
+		resources:  []string{},
 	}
 }
 
+// Query results will be provided in the order in which they are added to the system.
 func (sb *SystemBuilder) WithQuery(tags ...string) *SystemBuilder {
 	sb.queries = append(sb.queries, tags)
+	return sb
+}
+
+// Adds a resource required by the system. All resources are provided in a map, indexed by their given type as requested here.
+func (sb *SystemBuilder) WithResource(r string) *SystemBuilder {
+	sb.resources = append(sb.resources, r)
 	return sb
 }
 

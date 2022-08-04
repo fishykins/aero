@@ -1,8 +1,12 @@
 package ecs
 
-import log "github.com/fishykins/aero/pkg/logging"
+import (
+	"reflect"
 
-func (w *World) RunSystem(id string, response chan<- string, manager *WorldManager, queries ...QueryResult) {
+	log "github.com/fishykins/aero/pkg/logging"
+)
+
+func (w *World) RunSystem(id string, response chan<- string, manager *WorldManager, resources RMap, queries ...QueryResult) {
 	if _, ok := w.Systems[id]; !ok {
 		log.FatalWith("System not found", map[string]interface{}{"id": id, "queries": queries})
 		return
@@ -11,7 +15,7 @@ func (w *World) RunSystem(id string, response chan<- string, manager *WorldManag
 
 	// Run the system.
 	log.TraceWith("Running system...", map[string]interface{}{"id": id})
-	system.run(manager, queries...)
+	system.run(manager, resources, queries...)
 	response <- id
 }
 
@@ -57,6 +61,9 @@ func (m *WorldManager) UpdateWorld(w *World, concurency bool) {
 		if len(m.pendingSystems) > 0 {
 			m.updateSystems(w, nil)
 		}
+		if len(m.pendingResources) > 0 {
+			m.updateResources(w, nil)
+		}
 	} else {
 		m.updateWorldGo(w)
 	}
@@ -77,7 +84,10 @@ func (m *WorldManager) updateWorldGo(w *World) {
 		j++
 		go m.updateSystems(w, c)
 	}
-
+	if len(m.pendingResources) > 0 {
+		j++
+		go m.updateResources(w, c)
+	}
 	// Wait for all updates to finish
 	for i := 0; i < j; i++ {
 		<-c
@@ -134,8 +144,10 @@ func (m *WorldManager) updateSystems(w *World, c chan<- bool) {
 		w.Systems[id] = System{
 			run:       sb.systemFunc,
 			queries:   queryKeys,
+			resources: sb.resources,
 			runsAfter: sb.runAfter,
 		}
+		log.Info("System added: ", w.Systems[id])
 		// Reflect any "before" requirements into "after" requirements on the relevant systems.
 		if len(sb.rubBefore) > 0 {
 			for _, beforeId := range sb.rubBefore {
@@ -157,6 +169,18 @@ func (m *WorldManager) updateSystems(w *World, c chan<- bool) {
 		w.Systems[id] = system
 	}
 	m.pendingSystems = make([]*SystemBuilder, 0)
+	if c != nil {
+		c <- true
+	}
+}
+
+func (m *WorldManager) updateResources(w *World, c chan<- bool) {
+	for _, rb := range m.pendingResources {
+		typeId := reflect.TypeOf(rb).Name()
+		log.InfoWith("resource added", map[string]interface{}{"type": typeId, "data": rb})
+		w.Resources[typeId] = rb
+	}
+	m.pendingResources = make([]interface{}, 0)
 	if c != nil {
 		c <- true
 	}

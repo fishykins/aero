@@ -24,15 +24,19 @@ type System struct {
 	run       SystemFunc
 	runsAfter []string
 	queries   []uint32
+	resources []string
 }
 
-type SystemFunc func(manager *WorldManager, queries ...QueryResult)
+type SystemFunc func(manager *WorldManager, resources RMap, queries ...QueryResult)
 
 type Query []string
+
 type QueryResult struct {
 	ID     uint32
 	Result map[Entity][]interface{}
 }
+
+type RMap map[string]interface{}
 
 func (w *World) GetResource(name string) (interface{}, error) {
 	if res, ok := w.Resources[name]; ok {
@@ -43,6 +47,10 @@ func (w *World) GetResource(name string) (interface{}, error) {
 
 func (s System) GetQueries() []uint32 {
 	return s.queries
+}
+
+func (s System) GetResources() []string {
+	return s.resources
 }
 
 func (s System) SystemsBefore() []string {

@@ -1,29 +1,33 @@
 package main
 
 import (
-	log "github.com/fishykins/aero/pkg/logging"
-
 	app "github.com/fishykins/aero/pkg/ecs_app"
-	core "github.com/fishykins/aero/pkg/ecs_core"
+	ecs "github.com/fishykins/aero/pkg/ecs_core"
+	log "github.com/fishykins/aero/pkg/logging"
 )
 
 type age struct {
 	Age int
 }
 
+type ageResource struct {
+	speed int
+}
+
 func (a *age) Type() string {
 	return "age"
 }
 
-func ageSystem(m *core.WorldManager, queries ...core.QueryResult) {
+func ageSystem(m *ecs.WorldManager, resources ecs.RMap, queries ...ecs.QueryResult) {
+	ageResource := resources["ageResource"].(ageResource)
 	ageQuery := queries[0]
 	for _, components := range ageQuery.Result {
 		age := components[0].(*age)
-		age.Age += 1
+		age.Age += ageResource.speed
 	}
 }
 
-func printAgeSystem(m *core.WorldManager, queries ...core.QueryResult) {
+func printAgeSystem(m *ecs.WorldManager, resources ecs.RMap, queries ...ecs.QueryResult) {
 	ageQuery := queries[0]
 	for _, components := range ageQuery.Result {
 		age := components[0].(*age)
@@ -35,7 +39,8 @@ func main() {
 	log.SetLevel(5)
 	app := app.New()
 	app.AddEntity().WithComponent(&age{Age: 29}).Named("Fishy")
-	app.AddSystem(ageSystem).WithQuery("age")
+	app.AddResource(ageResource{speed: 2})
+	app.AddSystem(ageSystem).WithQuery("age").WithResource("ageResource")
 	app.AddSystem(printAgeSystem).After("ageSystem").WithQuery("age")
 	app.Run()
 }
